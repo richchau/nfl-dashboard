@@ -1,9 +1,12 @@
 package com.richchau.nfldashboard.model;
 
+import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Transient;
 
 @Entity
 public class Team {
@@ -14,6 +17,17 @@ public class Team {
     private String teamName;
     private long totalMatches;
     private long totalWins;
+
+    @Transient // not used as a db entry
+    private List<Game> games;
+
+    public List<Game> getGames() {
+        return games;
+    }
+
+    public void setGames(List<Game> games) {
+        this.games = games;
+    }
 
     public long getId() {
         return id;
@@ -50,6 +64,10 @@ public class Team {
     public Team(String teamName, long totalMatches) {
         this.teamName = teamName;
         this.totalMatches = totalMatches;
+
+    }
+
+    public Team() {
     }
 
     @Override
