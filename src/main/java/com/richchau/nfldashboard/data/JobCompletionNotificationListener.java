@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import javax.persistence.EntityManager;
+import javax.transaction.Transactional;
 
 import com.richchau.nfldashboard.model.Team;
 
@@ -28,15 +29,25 @@ public class JobCompletionNotificationListener extends JobExecutionListenerSuppo
     }
 
     @Override
+    @Transactional
     public void afterJob(JobExecution jobExecution) {
         if (jobExecution.getStatus() == BatchStatus.COMPLETED) {
             log.info("!!! JOB FINISHED! Time to verify the results");
 
             Map<String, Team> teamData = new HashMap<>();
 
-            em.createQuery("select g.team_home, count(*) from Game g group by g.team_home", Object[].class)
+            em.createQuery("select g.teamHome, count(*) from Game g group by g.teamHome", Object[].class)
                     .getResultList().stream().map(e -> new Team((String) e[0], (long) e[1]))
                     .forEach(team -> teamData.put(team.getTeamName(), team));
+
+            em.createQuery("select g.teamAway, count(*) from Game g group by g.teamAway", Object[].class)
+                    .getResultList().stream().forEach(e -> {
+                        Team team = teamData.get((String) e[0]);
+                        team.setTotalMatches(team.getTotalMatches() + (long) e[1]);
+                    });
+
+            teamData.values().forEach(team -> em.persist(team));
+            teamData.values().forEach(team -> System.out.println(team));
 
         }
     }
