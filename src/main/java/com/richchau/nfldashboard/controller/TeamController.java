@@ -1,5 +1,8 @@
 package com.richchau.nfldashboard.controller;
 
+import java.util.List;
+
+import com.richchau.nfldashboard.model.Game;
 import com.richchau.nfldashboard.model.Team;
 import com.richchau.nfldashboard.repository.GameRepository;
 import com.richchau.nfldashboard.repository.TeamRepository;
@@ -7,6 +10,7 @@ import com.richchau.nfldashboard.repository.TeamRepository;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -27,6 +31,11 @@ public class TeamController {
         team.setGames(gameRepository.findLatestGamesByTeam(teamName, 4));
 
         return team;
+    }
+
+    @GetMapping("/team/{teamName}/matches")
+    public List<Game> getGamesForTeam(@PathVariable String teamName, @RequestParam String scheduleSeason) {
+        return this.gameRepository.getGamesByTeamBySeason(teamName, scheduleSeason);
     }
 
 }
