@@ -33,7 +33,7 @@ public class TeamController {
         return team;
     }
 
-    @GetMapping("/team/{teamName}/matches")
+    @GetMapping("/team/{teamName}/games")
     public List<Game> getGamesForTeam(@PathVariable String teamName, @RequestParam String scheduleSeason) {
         return this.gameRepository.getGamesByTeamBySeason(teamName, scheduleSeason);
     }
