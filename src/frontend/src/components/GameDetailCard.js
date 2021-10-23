@@ -1,17 +1,29 @@
 import {React} from 'react';
 import {Link} from 'react-router-dom';
 
+import "./GameDetailCard.scss";
+
 export const GameDetailCard = ({teamName, game}) => {
     if(!game) return null;
     const otherTeam = game.teamHome === teamName ? game.teamAway : game.teamHome;
     const otherTeamRoute = `/teams/${otherTeam}`;
     return (
         <div className="GameDetailCard">
-        <h3>Latest Games</h3>
-        <h1>vs <Link to={otherTeamRoute}>{otherTeam}</Link></h1>
-        <h2>{game.scheduleDate}</h2>
-        <h3>at {game.stadium}</h3>
-        <h3>{game.scoreHome} - {game.scoreAway}</h3>
+            <div>
+                <span className="vs">vs</span>
+                <h1><Link to={otherTeamRoute}>{otherTeam}</Link></h1>
+                <h2 className="game-date">{game.scheduleDate}</h2>
+                <h3 className="game-stadium">at {game.stadium}</h3>
+                <h3 className="game-score">{game.scoreHome} - {game.scoreAway}</h3>
+            </div>
+            <div className="additional-detail">
+                <h3>Favorite Team</h3>
+                <p>{game.teamFavoriteId}</p>
+                <h3>Spread</h3>
+                <p>{game.spreadFavorite}</p>
+                <h3>Over / Under</h3>
+                <p>{game.overUnderLine}</p>
+            </div>
         </div>
     );
 }

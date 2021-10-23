@@ -3,6 +3,8 @@ import { useParams } from 'react-router-dom';
 import { GameDetailCard } from '../components/GameDetailCard';
 import { GameSmallCard } from '../components/GameSmallCard';
 
+import './TeamPage.scss';
+
 export const TeamPage = () => {
 
     const [team, setTeam] = useState({games: []});
@@ -26,9 +28,22 @@ export const TeamPage = () => {
 
     return (
         <div className="TeamPage">
-        <h1>{team.teamName}</h1>
-        <GameDetailCard teamName={team.teamName} game={team.games[0]}/>
+        <div className="team-name-section">
+            <h1 className="team-name">{team.teamName}</h1>
+        </div>
+        <div className="win-loss-ties-section">
+            Wins / Losses / Ties
+        </div>
+        <div className="match-detail-section">
+            <h3>Latest Games</h3>
+            <GameDetailCard teamName={team.teamName} game={team.games[0]}/>
+        </div>
+        
         {team.games.slice(1).map(game => <GameSmallCard teamName={team.teamName} game={game}/>)}
+
+        <div>
+            <a href="#">More</a>
+        </div>
         </div>
     );
 }
