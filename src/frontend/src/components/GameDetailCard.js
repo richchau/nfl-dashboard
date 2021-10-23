@@ -7,7 +7,7 @@ export const GameDetailCard = ({teamName, game}) => {
     const otherTeamRoute = `/teams/${otherTeam}`;
     return (
         <div className="GameDetailCard">
-        <h3>Latest Matches</h3>
+        <h3>Latest Games</h3>
         <h1>vs <Link to={otherTeamRoute}>{otherTeam}</Link></h1>
         <h2>{game.scheduleDate}</h2>
         <h3>at {game.stadium}</h3>
