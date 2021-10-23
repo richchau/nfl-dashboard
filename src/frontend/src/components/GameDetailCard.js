@@ -9,9 +9,12 @@ export const GameDetailCard = ({teamName, game}) => {
     const otherTeamRoute = `/teams/${otherTeam}`;
     var gameOutcome = "";
 
-    if(game.scoreHome > game.scoreAway){
+    const teamScore = game.teamHome === teamName ? game.scoreHome : game.scoreAway;
+    const otherTeamScore = game.teamHome === teamName ? game.scoreAway : game.scoreHome;
+
+    if(teamScore > otherTeamScore){
         gameOutcome = "won";
-    }else if(game.scoreHome < game.scoreAway){
+    }else if(teamScore < otherTeamScore){
         gameOutcome = "lost";
     }else{
         gameOutcome = "tied";
@@ -25,7 +28,7 @@ export const GameDetailCard = ({teamName, game}) => {
                 <h1><Link to={otherTeamRoute}>{otherTeam}</Link></h1>
                 <h2 className="game-date">{game.scheduleDate}</h2>
                 <h3 className="game-stadium">at {game.stadium}</h3>
-                <h3 className="game-score">{game.scoreHome} - {game.scoreAway}</h3>
+                <h3 className="game-score">{teamScore} - {otherTeamScore}</h3>
             </div>
             <div className="additional-detail">
                 <h3>Favorite Team</h3>

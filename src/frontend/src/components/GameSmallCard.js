@@ -7,11 +7,15 @@ export const GameSmallCard = ({teamName, game}) => {
 
     const otherTeam = game.teamHome === teamName ? game.teamAway : game.teamHome;
     const otherTeamRoute = `/teams/${otherTeam}`;
+
+    const teamScore = game.teamHome === teamName ? game.scoreHome : game.scoreAway;
+    const otherTeamScore = game.teamHome === teamName ? game.scoreAway : game.scoreHome;
+
     var gameOutcome = "";
 
-    if(game.scoreHome > game.scoreAway){
+    if(teamScore > otherTeamScore){
         gameOutcome = "won";
-    }else if(game.scoreHome < game.scoreAway){
+    }else if(teamScore < otherTeamScore){
         gameOutcome = "lost";
     }else{
         gameOutcome = "tied";
@@ -21,7 +25,7 @@ export const GameSmallCard = ({teamName, game}) => {
         <div className={'GameSmallCard ' + gameOutcome + '-card'}>
             <span className="vs">vs</span>
             <h3><Link to={otherTeamRoute}>{otherTeam}</Link></h3>
-            <p className = "game-score">{game.scoreHome} - {game.scoreAway}</p>
+            <p className = "game-score">{teamScore} - {otherTeamScore}</p>
         </div>
     );
 }
