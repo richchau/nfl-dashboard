@@ -41,8 +41,8 @@ export const TeamPage = () => {
         
         {team.games.slice(1).map(game => <GameSmallCard teamName={team.teamName} game={game}/>)}
 
-        <div>
-            <a href="#">More</a>
+        <div className="more-link">
+            <a href="#">More ></a>
         </div>
         </div>
     );
