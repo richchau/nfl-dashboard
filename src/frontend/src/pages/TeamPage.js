@@ -2,6 +2,7 @@ import {React, useEffect, useState} from 'react';
 import { useParams } from 'react-router-dom';
 import { GameDetailCard } from '../components/GameDetailCard';
 import { GameSmallCard } from '../components/GameSmallCard';
+import { PieChart } from 'react-minimal-pie-chart';
 
 import './TeamPage.scss';
 
@@ -33,6 +34,13 @@ export const TeamPage = () => {
         </div>
         <div className="win-loss-ties-section">
             Wins / Losses / Ties
+            <PieChart
+                data={[
+                    { title: 'Wins', value: 10, color: '#E38627' },
+                    { title: 'Loses', value: 15, color: '#C13C37' },
+                    { title: 'Ties', value: 20, color: '#6A2135' },
+                ]}
+            />;
         </div>
         <div className="match-detail-section">
             <h3>Latest Games</h3>
