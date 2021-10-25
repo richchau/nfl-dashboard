@@ -27,20 +27,22 @@ export const TeamPage = () => {
         return <h1>Team not found</h1>
     }
 
+
+
     return (
         <div className="TeamPage">
         <div className="team-name-section">
             <h1 className="team-name">{team.teamName}</h1>
         </div>
         <div className="win-loss-ties-section">
-            Wins / Losses / Ties
+            Win / Lose Ratio
             <PieChart
                 data={[
-                    { title: 'Wins', value: 10, color: '#E38627' },
-                    { title: 'Loses', value: 15, color: '#C13C37' },
-                    { title: 'Ties', value: 20, color: '#6A2135' },
+                    { title: 'Wins', value: 10, color: '#4da375' },
+                    { title: 'Loses', value: 15, color: '#a34d5d' },
+                    { title: 'Ties', value: 0, color: '#6A2135' },
                 ]}
-            />;
+            />
         </div>
         <div className="match-detail-section">
             <h3>Latest Games</h3>
