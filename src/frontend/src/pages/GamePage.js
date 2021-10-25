@@ -1,7 +1,9 @@
 import {React, useEffect, useState} from 'react';
 import { useParams } from 'react-router-dom';
 import { GameDetailCard } from '../components/GameDetailCard';
-import { GameSmallCard } from '../components/GameSmallCard';
+import { YearSelector } from '../components/YearSelector';
+
+import "./GamePage.scss";
 
 export const GamePage = () => {
 
@@ -22,10 +24,15 @@ export const GamePage = () => {
 
     return (
         <div className="GamePage">
-            <h1>Games Page</h1>
-            {
-                 games.map(game => <GameDetailCard teamName={teamName} game={game}/>)
-            }
+            <div className="year-selector">
+                <YearSelector teamName={teamName}/>
+            </div>
+            <div>
+                <h1>Games Page</h1>
+                {
+                    games.map(game => <GameDetailCard teamName={teamName} game={game}/>)
+                }
+            </div>
         </div>
     );
 }
